@@ -1,12 +1,21 @@
 package com.zitego.web.util;
 
+import java.io.IOException;
+import java.util.Collection;
 import java.util.StringTokenizer;
 import java.util.Enumeration;
 import java.util.Vector;
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.Part;
 
 /**
  * Wraps a request object to allow for requests in the form:
@@ -467,5 +476,65 @@ public class GenericRequestToken implements HttpServletRequest
     public String getLocalName()
     {
         return _requestObj.getLocalName();
+    }
+
+    @Override
+    public boolean authenticate(HttpServletResponse hsr) throws IOException, ServletException {
+        return _requestObj.authenticate(hsr);
+    }
+
+    @Override
+    public void login(String string, String string1) throws ServletException {
+        _requestObj.login(string, string1);
+    }
+
+    @Override
+    public void logout() throws ServletException {
+        _requestObj.logout();
+    }
+
+    @Override
+    public Collection<Part> getParts() throws IOException, IllegalStateException, ServletException {
+        return _requestObj.getParts();
+    }
+
+    @Override
+    public Part getPart(String string) throws IOException, IllegalStateException, ServletException {
+        return _requestObj.getPart(string);
+    }
+
+    @Override
+    public ServletContext getServletContext() {
+        return _requestObj.getServletContext();
+    }
+
+    @Override
+    public AsyncContext startAsync() {
+        return _requestObj.startAsync();
+    }
+
+    @Override
+    public AsyncContext startAsync(ServletRequest sr, ServletResponse sr1) {
+        return _requestObj.startAsync(sr, sr1);
+    }
+
+    @Override
+    public boolean isAsyncStarted() {
+        return _requestObj.isAsyncStarted();
+    }
+
+    @Override
+    public boolean isAsyncSupported() {
+        return _requestObj.isAsyncSupported();
+    }
+
+    @Override
+    public AsyncContext getAsyncContext() {
+        return _requestObj.getAsyncContext();
+    }
+
+    @Override
+    public DispatcherType getDispatcherType() {
+        return _requestObj.getDispatcherType();
     }
 }
